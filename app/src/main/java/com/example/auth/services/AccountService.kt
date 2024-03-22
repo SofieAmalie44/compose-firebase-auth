@@ -4,13 +4,13 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 class AccountService {
-    fun authenticate(email: String, password: String, onResult: () -> Unit) {
+    fun authenticate(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                onResult()
+                onSuccess()
             }
             .addOnFailureListener {
-                /* TODO */
+                onFailure()
             }
     }
 

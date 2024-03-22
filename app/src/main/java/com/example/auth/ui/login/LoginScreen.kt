@@ -15,11 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
 fun Login(
-    onRegistrationSuccess: () -> Unit,
+    onRegistrationSuccess: () -> Unit, onRegistrationFailure: () -> Unit
 ) {
     val loginViewModel: LoginViewModel = viewModel()
 
@@ -48,11 +49,12 @@ fun Login(
                 Button(onClick = {}) {
                     Text("Login")
                 }
-                Button(onClick = { loginViewModel.registerNewUser(onRegistrationSuccess) }) {
+                Button(onClick = {
+                    loginViewModel.registerNewUser(onRegistrationSuccess, onRegistrationFailure)
+                }) {
                     Text("Create new user")
                 }
             }
-
         }
     }
 }
@@ -60,5 +62,5 @@ fun Login(
 @Preview
 @Composable
 fun RegisterPreview() {
-    Login(onRegistrationSuccess = {})
+    Login(onRegistrationSuccess = {}, onRegistrationFailure = {})
 }
